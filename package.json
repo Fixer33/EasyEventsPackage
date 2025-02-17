@@ -1,0 +1,22 @@
+{
+  "name": "com.fixer33.easy-events",
+  "version": "1.0.0",
+  "displayName": "Easy Events",
+  "description": "No more huge EventManager class",
+  "unity": "6000.0",
+  "dependencies": {
+    "com.unity.test-framework": "1.4.6"
+  },
+  "author": {
+    "name": "Fixer33",
+    "email": "fsfixer33@gmail.com",
+    "url": "https://github.com/Fixer33"
+  },
+  "samples": [
+    {
+      "displayName": "Using as a field",
+      "description": "Contains sample showing how observable variables are serialized if used as a serialized field",
+      "path": "Samples~/Using as a field"
+    }
+  ]
+}
