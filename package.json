@@ -14,9 +14,9 @@
   },
   "samples": [
     {
-      "displayName": "Using as a field",
-      "description": "Contains sample showing how observable variables are serialized if used as a serialized field",
-      "path": "Samples~/Using as a field"
+      "displayName": "Creating custom events and subscribing",
+      "description": "Shows how to create new event, subscribe and trigger it",
+      "path": "Samples~/Creating custom events and subscribing"
     }
   ]
 }
