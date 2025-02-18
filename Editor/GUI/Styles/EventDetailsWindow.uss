@@ -1,0 +1,21 @@
+Label {
+    color: white;
+}
+
+#header-text {
+    -unity-text-align: middle-center;
+    font-size: 18px;
+}
+
+#header-time {
+    -unity-text-align: middle-center;
+    font-size: 18px;
+}
+
+#data-container {
+    padding-top: 10px;
+}
+
+#unity-content-container > Label {
+    margin-left: 5px;
+}

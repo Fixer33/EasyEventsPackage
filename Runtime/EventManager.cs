@@ -5,6 +5,13 @@ namespace EasyEvents
 {
     internal static class EventManager
     {
+#if UNITY_EDITOR
+        public static event Action EditorHistoryUpdated = delegate { };
+        public static IEnumerable<EventHistoryRecord> EditorHistory => EditorHistoryQueue;
+        private static readonly Queue<EventHistoryRecord> EditorHistoryQueue = new();
+        private const int STORED_HISTORY_RECORDS_AMOUNT = 15; // TODO: Change this to EditorPrefs to control it from GUI
+#endif
+        
         private static readonly Dictionary<Type, EventListenerCallbackDictionary> Dictionary = new();
         
         public static void AddListenerFor<T>(IEventListener listener, EventListenerCallback<T> callback) where T : IEvent
@@ -36,10 +43,17 @@ namespace EasyEvents
         public static void TriggerEvent<T>(T eventData) where T : IEvent
         {
             var type = eventData.GetType();
-            if (Dictionary.ContainsKey(type) == false)
+            if (Dictionary.TryGetValue(type, out var value) == false)
                 return;
             
-            Dictionary[type].TriggerCallbacks(eventData);
+            value.TriggerCallbacks(eventData);
+            
+#if UNITY_EDITOR
+            EditorHistoryQueue.Enqueue(new(DateTime.Now, eventData));
+            if (EditorHistoryQueue.Count > STORED_HISTORY_RECORDS_AMOUNT)
+                EditorHistoryQueue.Dequeue();
+            EditorHistoryUpdated?.Invoke();
+#endif
         }
 
         private class EventListenerCallbackDictionary

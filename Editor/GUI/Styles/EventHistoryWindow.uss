@@ -1,0 +1,59 @@
+#event-history__header {
+    -unity-text-align: middle-center;
+    font-size: 16px;
+}
+
+#event-history__header-divider {
+    height: 3px;
+    background-color: white;
+    margin-bottom: 3px;
+}
+
+EventPreviewElement {
+    height: 30px;
+    width: 100%;
+    flex-grow: 1;
+    margin-bottom: 2px;
+    margin-top: 1px;
+    transition-duration: 0.1s;
+    transition-property: all;
+    border-color: white;
+    border-width: 0;
+    border-bottom-width: 1px;
+    border-radius: 1px;
+    flex-direction: row;
+}
+
+/*#unity-content-container > EventPreviewElement :hover {*/
+/*    border-color: white;*/
+/*    border-width: 1px;*/
+/*    border-radius: 1px;*/
+/*}*/
+
+EventPreviewElement #event-preview__header {
+    flex-grow: 1;
+    -unity-text-align: middle-left;
+    padding-left: 5px;
+    color: white;
+}
+
+EventPreviewElement #event-preview__view-details-btn {
+    width: 100px;
+    height: 95%;
+    margin: 0;
+    margin-right: 3px;
+    padding: 0;
+    background-color: rgba(255,255,255,0);
+    border-color: white;
+    border-radius: 3px;
+    border-width: 1px;
+    color: white;
+}
+
+EventPreviewElement #event-preview__view-details-btn:hover {
+    background-color: rgba(255,255,255,0.11);
+}
+
+EventPreviewElement #event-preview__view-details-btn:active {
+    scale: 0.9 0.9;
+}
