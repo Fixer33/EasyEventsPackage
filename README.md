@@ -1,33 +1,82 @@
+# Easy Events
 
-# Easy Events package for Unity
+![Unity](https://img.shields.io/badge/Unity-UPM%20Package-blue)
+![GitHub](https://img.shields.io/github/license/Fixer33/EasyEventsPackage)
 
-Easily create new event with any data you need, subscribe to it and then call it from any place you need.
+Easy Events is a lightweight and flexible event system for Unity, designed to simplify event creation, subscription, and invocation. It provides an easy-to-use API for handling events efficiently in both runtime and editor environments.
 
-## Authors
+## Features
 
-- [@Fixer33](https://github.com/Fixer33)
-
+- Simple event creation using `IEvent` interface.
+- Easy subscription and unsubscription with `IEventListener`.
+- Built-in UI window for debugging, showing the last 15 triggered events and their parameters.
+- Sample usage available in Unity's **Samples** section.
+- Compatible with Unity's **UPM (Unity Package Manager)**.
 
 ## Installation
 
-Install with upm
+### Using UPM (Unity Package Manager)
 
-```bash
-  1. Open Unity Package Manager (Window/Package Manager)
-  2. Navigate to top-left corner of the window and press the plus (+) icon
-  3. Choose "Install package from git URL..."
-  4. Paste url: https://github.com/Fixer33/EasyEventsPackage.git
-  5. Press "Install"
+1. Open Unity and go to **Window > Package Manager**.
+2. Click the **+** button and select **Add package from git URL**.
+3. Enter the repository URL:
+   ```
+   https://github.com/Fixer33/EasyEvents.git
+   ```
+4. Click **Add** and wait for Unity to install the package.
+
+## Usage
+
+### Creating an Event
+To create an event, define a class, struct, or record that implements `IEvent`. Add public parameters to pass data when the event is triggered.
+
+```csharp
+public record PlayerScoredEvent(int PlayerId, int Score) : IEvent
+{
+    public int PlayerId { get; private set; } = PlayerId;
+    public int Score { get; private set; } = Score;
+}
 ```
 
-## Running Tests
+### Subscribing to an Event
+A listener class must implement `IEventListener`. You can subscribe using:
 
-There are editor tests included using Unity's package "com.unity.test-framework"
-To run these tests:
-
-```bash
-  1. Navigate to Window/General/Test Runner
-  2. Run tests by any of two ways:
-    2a. Press "Run All"
-    2b. RMB on specific test and choose "Run"
+```csharp
+public class ScoreListener : MonoBehaviour, IEventListener
+{
+    private void OnEnable()
+    {
+        this.StartListeningTo<PlayerScoredEvent>(OnPlayerScored);
+    }
+    
+    private void OnDisable()
+    {
+        this.StopListeningTo<PlayerScoredEvent>(OnPlayerScored);
+    }
+    
+    private void OnPlayerScored(PlayerScoredEvent e)
+    {
+        Debug.Log($"Player {e.PlayerId} scored {e.Score} points!");
+    }
+}
 ```
+
+### Triggering an Event
+Create an instance of the event and call `.Trigger()` to invoke it:
+
+```csharp
+new PlayerScoredEvent(1, 100).Trigger();
+```
+
+## Debugging Events in Editor
+Easy Events provides a UI window to monitor event logs. Open it via:
+
+**Window > Fixer33 > Event history**
+
+This window displays the last 15 triggered events along with their parameters.
+
+## Samples
+**Samples** section includes example scene demonstrating how to use Easy Events. Check them out to get started quickly.
+
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
