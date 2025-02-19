@@ -71,7 +71,7 @@ new PlayerScoredEvent(1, 100).Trigger();
 ## Debugging Events in Editor
 Easy Events provides a UI window to monitor event logs. Open it via:
 
-**Window > Fixer33 > Event history**
+**Tools > Fixer33 > Event history**
 
 This window displays the last 15 triggered events along with their parameters.
 
