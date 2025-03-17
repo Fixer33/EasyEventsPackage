@@ -58,11 +58,15 @@ namespace EasyEvents
 
         private class EventListenerCallbackDictionary
         {
+            private const int BUFFER_PREWARM_LENGTH = 5;
+            
             private readonly Dictionary<IEventListener, List<CallbackData>> _callbackDictionary;
+            private CallbackData[] _buffer;
 
             internal EventListenerCallbackDictionary()
             {
                 _callbackDictionary = new();
+                _buffer = new CallbackData[BUFFER_PREWARM_LENGTH];
             }
 
             public void AddCallbackData<T>(IEventListener listener, EventListenerCallback<T> callback) where T : IEvent
@@ -90,15 +94,25 @@ namespace EasyEvents
 
             public void TriggerCallbacks(IEvent eventData)
             {
-                foreach (var callbackRecord in _callbackDictionary)
+                var dict = new Dictionary<IEventListener, List<CallbackData>>(_callbackDictionary);
+                foreach (var callbackRecord in dict)
                 {
                     if (callbackRecord.Value == null)
                         continue;
 
                     // ReSharper disable once PossibleNullReferenceException
-                    foreach (var callbackData in callbackRecord.Value)
+                    if (_buffer.Length < callbackRecord.Value.Count)
+                        Array.Resize(ref _buffer, callbackRecord.Value.Count);
+                    
+                    for (var i = 0; i < callbackRecord.Value.Count; i++)
                     {
-                        callbackData.Callback?.Invoke(eventData);
+                        _buffer[i] = callbackRecord.Value[i];
+                    }
+                    
+                    for (var i = 0; i < _buffer.Length; i++)
+                    {
+                        _buffer[i]?.Callback?.Invoke(eventData);
+                        _buffer[i] = null;
                     }
                 }
             }

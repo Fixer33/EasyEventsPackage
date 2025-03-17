@@ -1,6 +1,6 @@
 {
   "name": "com.fixer33.easy-events",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "Easy Events",
   "description": "No more huge EventManager class",
   "unity": "6000.0",
