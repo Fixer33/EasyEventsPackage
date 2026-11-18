@@ -9,7 +9,9 @@ namespace EasyEvents
         public static event Action EditorHistoryUpdated = delegate { };
         public static IEnumerable<EventHistoryRecord> EditorHistory => EditorHistoryQueue;
         private static readonly Queue<EventHistoryRecord> EditorHistoryQueue = new();
-        private const int STORED_HISTORY_RECORDS_AMOUNT = 15; // TODO: Change this to EditorPrefs to control it from GUI
+        private const string HISTORY_SIZE_PREF_KEY = "Fixer33.EasyEvents.HistorySize";
+        private const int DEFAULT_HISTORY_SIZE = 15;
+        private static int HistorySize => Math.Max(1, UnityEditor.EditorPrefs.GetInt(HISTORY_SIZE_PREF_KEY, DEFAULT_HISTORY_SIZE));
 #endif
         
         private static readonly Dictionary<Type, EventListenerCallbackDictionary> Dictionary = new();
@@ -50,7 +52,7 @@ namespace EasyEvents
             
 #if UNITY_EDITOR
             EditorHistoryQueue.Enqueue(new(DateTime.Now, eventData));
-            if (EditorHistoryQueue.Count > STORED_HISTORY_RECORDS_AMOUNT)
+            if (EditorHistoryQueue.Count > HistorySize)
                 EditorHistoryQueue.Dequeue();
             EditorHistoryUpdated?.Invoke();
 #endif
