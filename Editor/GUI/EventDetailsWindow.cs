@@ -32,7 +32,8 @@ namespace EasyEvents.Editor.GUI
             {
                 rootVisualElement.styleSheets.Add(style);
             }
-            
+            rootVisualElement.AddToClassList("window-root");
+
             rootVisualElement.Add(new Label()
             {
                 name = "header-text",
@@ -41,7 +42,7 @@ namespace EasyEvents.Editor.GUI
             rootVisualElement.Add(new Label()
             {
                 name = "header-time",
-                text = _record.Time.ToString("HH:mm:ss")
+                text = _record.Time.ToString("HH:mm:ss.fff")
             });
             
             rootVisualElement.Add(_dataContainer = new ScrollView()

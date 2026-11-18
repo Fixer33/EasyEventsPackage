@@ -1,21 +1,45 @@
+:root {
+  --bg-base:#0F1115; --bg-surface:#171A21; --bg-raised:#1E222B; --bg-overlay:#272C37; --bg-hover:#2E3441;
+  --border-subtle:#262B35; --border-default:#343B49; --border-strong:#475066;
+  --text-primary:#E8ECF3; --text-secondary:#A3ACBD; --text-muted:#6F7889; --text-on-accent:#FFFFFF;
+  --accent:#3B82F6; --accent-hover:#5B9BFF; --accent-pressed:#2B6AD8; --accent-subtle:#1B2A47; --accent-border:#2F5FB3;
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px; --space-6:32px;
+  --radius-sm:6px; --radius-md:10px; --radius-lg:14px;
+}
+
+.window-root {
+    background-color: var(--bg-surface);
+}
+
 Label {
-    color: white;
+    color: var(--text-primary);
 }
 
 #header-text {
-    -unity-text-align: middle-center;
-    font-size: 18px;
+    -unity-text-align: middle-left;
+    font-size: 16px;
+    -unity-font-style: bold;
+    margin: 16px 20px 0 20px;
 }
 
 #header-time {
-    -unity-text-align: middle-center;
-    font-size: 18px;
+    -unity-text-align: middle-left;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 2px 20px 0 20px;
 }
 
 #data-container {
-    padding-top: 10px;
+    flex-grow: 1;
+    padding: 16px 20px 0 20px;
 }
 
-#unity-content-container > Label {
-    margin-left: 5px;
+#data-container Label {
+    font-size: 14px;
+    margin: 0 0 12px 0;
+    padding: 0;
+    -unity-text-align: upper-left;
+    white-space: normal;
+    color: var(--text-primary);
 }
+

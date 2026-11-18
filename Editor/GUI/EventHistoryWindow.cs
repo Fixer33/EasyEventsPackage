@@ -29,7 +29,8 @@ namespace EasyEvents.Editor.GUI
             {
                 rootVisualElement.styleSheets.Add(style);
             }
-            
+            rootVisualElement.AddToClassList("window-root");
+
             rootVisualElement.Add(new Label()
             {
                 name = "event-history__header",

@@ -14,7 +14,12 @@ namespace EasyEvents.Editor.GUI
             this.Add(new Label()
             {
                 name = "event-preview__header",
-                text = $"[{record.Time:HH:mm:ss}] {record.EventData.GetType().Name}"
+                text = record.EventData.GetType().Name
+            });
+            this.Add(new Label()
+            {
+                name = "event-preview__time",
+                text = record.Time.ToString("HH:mm:ss")
             });
             this.Add(_viewDetailsBtn = new Button()
             {
