@@ -21,7 +21,7 @@ Easy Events is a lightweight and flexible event system for Unity, designed to si
 2. Click the **+** button and select **Add package from git URL**.
 3. Enter the repository URL:
    ```
-   https://github.com/Fixer33/EasyEvents.git
+   https://github.com/Fixer33/EasyEventsPackage.git
    ```
 4. Click **Add** and wait for Unity to install the package.
 
@@ -80,3 +80,8 @@ This window displays the last 15 triggered events along with their parameters.
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Documentation
+
+- [Package Description](Documentation/Package%20Description.md)
+- [Open Questions](Documentation/Open%20Questions.md)
