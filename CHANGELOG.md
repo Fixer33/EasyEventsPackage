@@ -1,3 +1,15 @@
+## [1.0.2] - 2026-11-20
+
+### Added
+
+- Timestamps on events in the history and details windows
+- Documentation: package description, usage guide, open questions
+
+### Changed
+
+- Restyled the event history and details windows
+- Editor event history size is read from EditorPrefs
+
 ## [1.0.1] - 2025-03-17
 
 ### Fixed
